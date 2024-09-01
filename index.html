@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist Form</title>
+    <title>Fire Safety Inspection Checklist</title>
     <style>
         table {
             width: 100%;
@@ -14,35 +14,46 @@
             padding: 8px;
             text-align: center;
         }
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
     <h1>Fire Safety Inspection Checklist</h1>
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <table>
-            <tr>
-                <th>1</th>
-                <th>0</th>
-                <th>S</th>
-                <th>N/A</th>
-                <th>Inspected</th>
-                <th>Observations / Comments</th>
-                <th>Rectification action (by Department)</th>
-                <th>Completion date (by Department)</th>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="item1_1"></td>
-                <td><input type="checkbox" name="item1_0"></td>
-                <td><input type="checkbox" name="item1_S"></td>
-                <td><input type="checkbox" name="item1_NA"></td>
-                <td><input type="text" name="inspected1"></td>
-                <td><input type="text" name="comments1"></td>
-                <td><input type="text" name="action1"></td>
-                <td><input type="date" name="date1"></td>
-            </tr>
-            <!-- Add more rows as needed -->
-        </table>
-        <button type="submit">Submit</button>
-    </form>
+    <table>
+        <tr>
+            <th>1</th>
+            <th>0</th>
+            <th>S</th>
+            <th>N/A</th>
+            <th>Inspected</th>
+            <th>Observations / Comments</th>
+            <th>Rectification action (by Department)</th>
+            <th>Completion date (by Department)</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="item1_1"></td>
+            <td><input type="checkbox" name="item1_0"></td>
+            <td><input type="checkbox" name="item1_S"></td>
+            <td><input type="checkbox" name="item1_NA"></td>
+            <td><input type="text" name="inspected1"></td>
+            <td><input type="text" name="comments1"></td>
+            <td><input type="text" name="action1"></td>
+            <td><input type="date" name="date1"></td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </table>
+    <button onclick="generatePDF()">Download PDF</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.text("Fire Safety Inspection Checklist", 10, 10);
+            doc.autoTable({ html: 'table' });
+            doc.save('checklist.pdf');
+        }
+    </script>
 </body>
 </html>
